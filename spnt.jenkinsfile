@@ -1,0 +1,42 @@
+pipeline {
+agent any 
+stages {
+stage('One') {
+steps{
+echo 'Hit, this is me kkiran'
+}
+}
+stage('Two') {
+steps {
+input('Do you want to peoceed')
+}
+}
+stage('Three'){
+when{
+not{
+branch "main"
+}
+}
+steps{
+echo 'Helllo'
+}
+}
+stage('Four'){
+parallel{
+stage('unit test'){
+steps {
+echo "running the unit test..."
+}
+}
+stage('integration testing') {
+agent {
+docker {
+reuseNode false
+image 'ubantu'
+]
+}
+steps{
+echo 'Running the integration test...'
+}
+}
+]
